@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="jumbotron jumbotron-fluid">
+
+
+    <div class="d-flex justify-content-center align-items-center">
+        <img class="img-responsive" id="thor-image" src="{% static 'img/thor-hammer.png' %}" alt="" srcset="">
+    </div>
+    <div class="d-flex justify-content-center align-items-center">
+        <h1 class="display-3 font-weight-bold"><span class="text-danger">Grab</span>-it!</h1>
+    </div>
+
+
+    <div class="d-flex justify-content-center align-items-center">
+        <form action="/login/" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="exampleInputEmail1">Username</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-danger">Login</button>
+            </div>
+            {% for message in messages %}
+
+            <div class="alert alert-danger my-3 alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                {{ message }}
+
+            </div>
+            {% endfor %}
+            <small id="emailHelp" class="form-text text-muted">Don't have an account yet? Sign up <a
+                    href="{% url 'sign-up' %}" class="text-danger">here</a>.</small>
+
+        </form>
+    </div>
+
+
+</div>
+{% endblock %}

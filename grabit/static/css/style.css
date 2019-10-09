@@ -1,0 +1,29 @@
+#outer{
+  padding: 80px;
+}
+#thor-image{
+  height: 300px;
+  
+}
+.boxx {
+  color: red
+}
+
+
+
+/* PREDEFINED STYLES */
+html {
+    scroll-behavior: smooth;
+  }
+
+.fade.in {
+    opacity: 1;
+  }
+  .modal.in .modal-dialog {
+    -webkit-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    transform: translate(0, 0);
+  }
+  .modal-backdrop.in {
+    opacity: 0.5;
+  }

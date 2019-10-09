@@ -1,0 +1,78 @@
+Item Model -
+
+class Item(models.Model):
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    title = models.CharField(max_length=30, blank=False)
+    description = models.CharField(max_length=255)
+    img = models.ImageField(upload_to='images/')
+    is_worthy = models.BooleanField(default=None, blank=True, null=True)
+
+    def __str__(self):
+        return self.title
+
+
+Item admin models
+
+@admin.register(Item)
+class Item(admin.ModelAdmin):
+    fields = ('title', 'description', 'img', 'is_worthy')
+    list_display = ('title', 'description', 'is_worthy')
+
+
+Column HTML
+<div id="box-items" class="container">
+        <div class="row">
+            {% for item in response.items %}
+            <div class="col-sm-3">
+                <div class="card">
+                    <img class="card-img-top" src="media/{{item.img}}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{item.title}}</h5>
+                        <p class="card-text">{{item.description}}</p>
+                        <a site="{% url 'grab' item_id=item.uuid %}" data-toggle="modal" data-target="#exampleModalCenter" class="grab btn btn-danger text-white">Grab this!</a>
+                    </div>  
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+Modal Code - 
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                
+                <div class="modal-body">
+                        <div class="text-center">
+                                <div class="spinner-border" role="status">
+                                  <span class="sr-only">Loading...</span>
+                                </div>
+                                <h3><span class="text-danger">Thor </span>is calculating your worth... </h3>
+                              </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+Modal Button - 
+<a site="{% url 'grab' item_id=item.uuid %}" data-toggle="modal" data-target="#exampleModalCenter" class="grab btn btn-danger text-white">Grab this!</a>
+
+
+
+Flex box Class - 
+
+d-flex justify-content-center align-items-center
+
+
+Jumbotron Class -
+jumbotron jumbotron-fluid
